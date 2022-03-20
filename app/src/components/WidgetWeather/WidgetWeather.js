@@ -19,23 +19,25 @@ const WidgetWeather = ({ zipCode, city }) => {
     [city, zipCode]
   );
 
+  // Background color changes depending on the temperature
   let color;
   function backgrounColor(color) {
-    if (temperature > 32) return color = 'high5';
-    if (temperature <=32 && temperature > 29) return color = 'high4';
-    if (temperature <= 29 && temperature > 26) return color = 'high3';
-    if (temperature <= 26 && temperature > 23) return color = 'high2';
-    if (temperature <= 23 && temperature > 20) return color = 'high1';
-    if (temperature <= 20 && temperature > 17) return color = 'medium5';
-    if (temperature <= 17 && temperature > 14) return color = 'medium4';
-    if (temperature <= 14 && temperature > 11) return color = 'medium3';
-    if (temperature <= 11 && temperature > 8) return color = 'medium2';
-    if (temperature <= 8 && temperature > 5) return color = 'medium1';
-    if (temperature <= 5 && temperature > 2) return color = 'low5';
-    if (temperature <= 2 && temperature > -1) return color = 'low4';
-    if (temperature <= -1 && temperature > -4) return color = 'low3';
-    if (temperature <= -4 && temperature > -7) return color = 'low2';
-    if (temperature <= -7) return color = 'low1';
+    if (temperature > 32) color = 'high5';
+    else if (temperature <=32 && temperature > 29) color = 'high4';
+    else if (temperature <= 29 && temperature > 26) color = 'high3';
+    else if (temperature <= 26 && temperature > 23) color = 'high2';
+    else if (temperature <= 23 && temperature > 20) color = 'high1';
+    else if (temperature <= 20 && temperature > 17) color = 'medium5';
+    else if (temperature <= 17 && temperature > 14) color = 'medium4';
+    else if (temperature <= 14 && temperature > 11) color = 'medium3';
+    else if (temperature <= 11 && temperature > 8) color = 'medium2';
+    else if (temperature <= 8 && temperature > 5) color = 'medium1';
+    else if (temperature <= 5 && temperature > 2) color = 'low5';
+    else if (temperature <= 2 && temperature > -1) color = 'low4';
+    else if (temperature <= -1 && temperature > -4) color = 'low3';
+    else if (temperature <= -4 && temperature > -7) color = 'low2';
+    else if (temperature <= -7) color = 'low1';
+    return color;
   }
 
   return (
