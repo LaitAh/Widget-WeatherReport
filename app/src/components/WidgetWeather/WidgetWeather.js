@@ -1,10 +1,15 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSquarePen, faSquareCheck } from '@fortawesome/free-solid-svg-icons'
 import './widgetWeather.scss';
 
-const WidgetWeather = ({ zipCode, city, apiId }) => {
+const WidgetWeather = ({ apiId }) => {
   const [temperature, setTemperature] = useState('-');
+  const [city, setCity] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [formSubmit, setFormSubmit] = useState(false);
 
   useEffect(() => {
     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${zipCode},fr&APPID=${apiId}&units=metric`)
@@ -16,7 +21,7 @@ const WidgetWeather = ({ zipCode, city, apiId }) => {
         setTemperature(temperatureToDisplay);
       }
     )},
-    [city, zipCode]
+    [city, zipCode, apiId]
   );
 
   // Background color changes depending on the temperature
@@ -44,12 +49,52 @@ const WidgetWeather = ({ zipCode, city, apiId }) => {
     <article className="weather-widget" id={backgrounColor(color)}>
       <div className="weather-container">
         <div className="weather-infos">
-          <h3 className="weather-city">
-            {city}
-          </h3>
-          <p className="weather-zipcode">
-            {zipCode}
-          </p>
+          <form
+            action=""
+            onSubmit={(event) => {
+              event.preventDefault();
+            }}
+          >
+            <label htmlFor="city" className="weather-city">
+              Ville :
+              <input
+                type="text"
+                name="city"
+                className={formSubmit ? "weather-city--form" : "weather-city--form--validated"}
+                placeholder="Paris"
+                readOnly={city && !formSubmit}
+                value={city}
+                onChange={(event) => {
+                  const { value: newValue } = event.target;
+                  setCity(newValue);
+                }}
+              />
+            </label>
+            <label htmlFor="zipCode" className="weather-zipcode">
+              Code postal :
+              <input
+                type="text"
+                name="zipCode"
+                className={formSubmit ? "weather-zipCode--form" : "weather-zipCode--form--validated"}
+                placeholder="75000"
+                readOnly={zipCode && !formSubmit}
+                value={zipCode}
+                onChange={(event) => {
+                  const { value: newValue } = event.target;
+                  setZipCode(newValue);
+                }}
+              />
+            </label>
+            <button
+              className="weather-button"
+              type="submit"
+              onClick={() => {
+                setFormSubmit(!formSubmit);
+              }}
+            >
+              {formSubmit ? <FontAwesomeIcon icon={faSquareCheck} /> : <FontAwesomeIcon icon={faSquarePen} />}
+            </button>
+          </form>
         </div>
         <div className="weather-temperature">
           {temperature}°C
@@ -60,8 +105,7 @@ const WidgetWeather = ({ zipCode, city, apiId }) => {
 } 
 
 WidgetWeather.propTypes = {
-  zipCode: PropTypes.string.isRequired,
-  city: PropTypes.string.isRequired,
+  apiId: PropTypes.string.isRequired,
 }
 
 export default WidgetWeather;

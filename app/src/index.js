@@ -8,8 +8,6 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
     <WidgetWeather
-      city="Marseille"
-      zipCode="13009"
       apiId={ApiId()}
     />
   </React.StrictMode>,
