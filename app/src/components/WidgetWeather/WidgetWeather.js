@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './widgetWeather.scss';
 
-const WidgetWeather = ({ zipCode, city }) => {
+const WidgetWeather = ({ zipCode, city, apiId }) => {
   const [temperature, setTemperature] = useState('-');
 
   useEffect(() => {
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${zipCode},fr&APPID=f25240e8ed09d51144008f7d19b893d4&units=metric`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${zipCode},fr&APPID=${apiId}&units=metric`)
     // To get the temperature in Fahrenheit, remove '&units=metric'
       .then((response) => {
         console.log(response);

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import WidgetWeather from './components/WidgetWeather/WidgetWeather';
+import ApiId from './ApiId';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
@@ -9,6 +10,7 @@ ReactDOM.render(
     <WidgetWeather
       city="Marseille"
       zipCode="13009"
+      apiId={ApiId()}
     />
   </React.StrictMode>,
   document.getElementById('root')
